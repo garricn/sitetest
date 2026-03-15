@@ -2,3 +2,4 @@ node_modules/
 __baselines__/
 __captures__/
 .env
+.claude/statusline*

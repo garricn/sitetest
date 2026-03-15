@@ -1,0 +1,22 @@
+{
+  "name": "sitetest",
+  "version": "0.1.0",
+  "description": "Behavior test engine for web UIs — discover and run test runbooks via CDP.",
+  "type": "module",
+  "bin": {
+    "sitetest": "./bin/sitetest.js"
+  },
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "keywords": ["testing", "behavior", "cdp", "playwright", "runbook"],
+  "license": "MIT",
+  "dependencies": {
+    "sitecap": "file:../sitecap",
+    "playwright": "^1.58.2",
+    "js-yaml": "^4.1.0"
+  }
+}

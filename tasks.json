@@ -83,6 +83,20 @@
       ]
     },
     {
+      "name": "Bug Fixes",
+      "prefix": "FIX",
+      "tasks": [
+        {
+          "id": "FIX-1",
+          "task": "Headless session cookie persistence — cookies set via server-side redirects not visible to subsequent navigations. Plan: tasks/active/fix-1-cookie-persistence-2026-03-15.md",
+          "owner": "--",
+          "depends": ["RUN-8"],
+          "status": "pending",
+          "release": "v0.1.1"
+        }
+      ]
+    },
+    {
       "name": "Capture Integration",
       "prefix": "CAP",
       "tasks": [

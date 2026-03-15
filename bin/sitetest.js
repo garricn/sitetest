@@ -6,7 +6,7 @@ import { readFile, readdir, stat } from "node:fs/promises";
 import { runRunbook } from "../lib/runner.js";
 import { updateBaselines } from "../lib/baseline.js";
 import { discover } from "../lib/discover.js";
-import { printResult } from "../lib/reporter.js";
+import { printResult, formatJson, formatJunit } from "../lib/reporter.js";
 
 const { values, positionals } = parseArgs({
   allowPositionals: true,
@@ -16,8 +16,10 @@ const { values, positionals } = parseArgs({
     port: { type: "string", short: "p", default: "9222" },
     env: { type: "string", short: "e" },
     out: { type: "string", short: "o" },
+    output: { type: "string" },
     site: { type: "string", short: "s" },
     sitegrade: { type: "string" },
+    "continue-on-error": { type: "boolean", default: false },
     all: { type: "boolean", default: false },
     help: { type: "boolean", short: "h", default: false },
   },
@@ -42,8 +44,10 @@ Options:
   -e, --env <path>         Path to .env file (default: .env)
   -o, --out <dir>          Output directory for discovered runbooks (default: ./runbooks)
   -s, --site <url>         Base site URL (for discover; auto-detected from meta.json)
+  --output <format>        Output format: terminal (default), json, junit
   --sitegrade <file>       Sitegrade findings JSON (for discover; optional)
   --headless               Launch headless Chrome instead of attaching to running Chrome
+  --continue-on-error      Run all steps even after failures
   --all                    Update all runbooks in directory (for update command)
   -h, --help               Show this help
 
@@ -93,6 +97,7 @@ if (command === "run") {
 
   let totalPassed = 0;
   let totalFailed = 0;
+  const allResults = [];
 
   for (const path of runbookPaths) {
     try {
@@ -101,15 +106,25 @@ if (command === "run") {
         cdpPort: parseInt(values.port, 10),
         headless: values.headless,
         dotenvPath: values.env ? resolve(values.env) : undefined,
+        continueOnError: values["continue-on-error"],
       });
 
-      printResult(result);
+      allResults.push(result);
+      if (!values.output || values.output === "terminal") {
+        printResult(result);
+      }
       totalPassed += result.passed;
       totalFailed += result.failed;
     } catch (err) {
       console.error(`\nError running ${path}: ${err.message}`);
       totalFailed++;
     }
+  }
+
+  if (values.output === "json") {
+    console.log(formatJson(allResults.length === 1 ? allResults[0] : allResults));
+  } else if (values.output === "junit") {
+    console.log(formatJunit(allResults));
   }
 
   process.exit(totalFailed > 0 ? 1 : 0);

@@ -143,7 +143,7 @@
           "task": "Aria tree parser — sitecap accessibility.txt → structured element list with roles/names/states",
           "owner": "--",
           "depends": ["CAP-4"],
-          "status": "pending",
+          "status": "done",
           "release": "v0.3.0"
         },
         {
@@ -151,7 +151,7 @@
           "task": "Confidence classification — high/medium/low per element type, determines assert vs capture-baseline",
           "owner": "--",
           "depends": ["DSC-1"],
-          "status": "pending",
+          "status": "done",
           "release": "v0.3.0"
         },
         {
@@ -159,7 +159,7 @@
           "task": "Runbook generator — elements → YAML runbook with appropriate assertions per confidence level",
           "owner": "--",
           "depends": ["DSC-2"],
-          "status": "pending",
+          "status": "done",
           "release": "v0.3.0"
         },
         {
@@ -167,7 +167,7 @@
           "task": "sitegrade testability integration — consume findings to skip untestable elements. Library API: discover()",
           "owner": "--",
           "depends": ["DSC-3"],
-          "status": "pending",
+          "status": "done",
           "release": "v0.3.0"
         }
       ]

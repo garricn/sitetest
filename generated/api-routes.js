@@ -24,15 +24,18 @@ function respond(res, status, data) {
 
 export async function handleRequest(req, res) {
   try {
-    if (req.method === "GET" && req.url === "/health") {
+    const parsed = new URL(req.url, "http://localhost");
+    const pathname = parsed.pathname;
+
+    if (req.method === "GET" && pathname === "/health") {
       return respond(res, 200, { ok: true, version: VERSION });
     }
 
-    const route = routes.find((r) => r.method === req.method && r.path === req.url);
+    const route = routes.find((r) => r.method === req.method && r.path === pathname);
     if (!route) return respond(res, 404, { error: "not found" });
 
     const input = req.method === "GET"
-      ? Object.fromEntries(new URL(req.url, "http://localhost").searchParams)
+      ? Object.fromEntries(parsed.searchParams)
       : await readBody(req);
 
     const validated = route.op.input.parse(input);

@@ -93,11 +93,11 @@ export const tools = [
 export async function handleTool(name, args) {
   switch (name) {
       case "run":
-        return ops.runOp.handler(args);
+        return ops.runOp.handler(ops.runOp.input.parse(args));
       case "discover":
-        return ops.discoverOp.handler(args);
+        return ops.discoverOp.handler(ops.discoverOp.input.parse(args));
       case "update":
-        return ops.updateOp.handler(args);
+        return ops.updateOp.handler(ops.updateOp.input.parse(args));
     default:
       throw new Error(`Unknown tool: ${name}`);
   }

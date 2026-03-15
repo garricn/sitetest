@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 
+import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { tools, handleTool } from "../generated/mcp-tools.js";
 
-const server = new Server({ name: "sitetest", version: "0.5.0" }, { capabilities: { tools: {} } });
+const pkg = JSON.parse(await readFile(resolve(import.meta.dirname, "../package.json"), "utf-8"));
+const server = new Server({ name: "sitetest", version: pkg.version }, { capabilities: { tools: {} } });
 
 server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools }));
 

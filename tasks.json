@@ -88,10 +88,10 @@
       "tasks": [
         {
           "id": "CAP-1",
-          "task": "Import sitecap capturePage() for capture steps. Baseline save/load to __baselines__ directories",
+          "task": "Import sitecap capturePage() for capture steps. Baseline save/load to __baselines__ directories. Plan: tasks/active/cap-phase2-capture-diff-2026-03-15.md",
           "owner": "--",
           "depends": ["RUN-8"],
-          "status": "pending",
+          "status": "done",
           "release": "v0.2.0"
         },
         {
@@ -99,7 +99,7 @@
           "task": "Capture diff — pixelmatch screenshots, text diff aria, JSON diff console/network/storage. Configurable thresholds",
           "owner": "--",
           "depends": ["CAP-1"],
-          "status": "pending",
+          "status": "done",
           "release": "v0.2.0"
         },
         {
@@ -107,7 +107,7 @@
           "task": "Invariant assertions — no_console_errors, no_network_errors, a11y_complete",
           "owner": "--",
           "depends": ["CAP-2"],
-          "status": "pending",
+          "status": "done",
           "release": "v0.2.0"
         },
         {
@@ -115,7 +115,7 @@
           "task": "sitetest update CLI — accept current captures as new baselines. Library API: update()",
           "owner": "--",
           "depends": ["CAP-2"],
-          "status": "pending",
+          "status": "done",
           "release": "v0.2.0"
         }
       ]

@@ -4,6 +4,7 @@ import { parseArgs } from "node:util";
 import { resolve } from "node:path";
 import { readdir, stat } from "node:fs/promises";
 import { runRunbook } from "../lib/runner.js";
+import { updateBaselines } from "../lib/baseline.js";
 import { printResult } from "../lib/reporter.js";
 
 const { values, positionals } = parseArgs({
@@ -13,6 +14,7 @@ const { values, positionals } = parseArgs({
     headed: { type: "boolean", default: false },
     port: { type: "string", short: "p", default: "9222" },
     env: { type: "string", short: "e" },
+    all: { type: "boolean", default: false },
     help: { type: "boolean", short: "h", default: false },
   },
 });
@@ -27,19 +29,43 @@ Usage:
   sitetest run <runbook.yaml>              Run a single runbook
   sitetest run <dir>                       Run all runbooks in directory
   sitetest run <runbook.yaml> --headless   Launch headless Chrome (default: attach via CDP)
+  sitetest update <runbook.yaml>           Accept current captures as new baselines
+  sitetest update <dir> --all              Accept all captures in directory
 
 Options:
   -p, --port <port>    Chrome DevTools port (default: 9222)
   -e, --env <path>     Path to .env file (default: .env)
   --headless           Launch headless Chrome instead of attaching to running Chrome
+  --all                Update all runbooks in directory (for update command)
   -h, --help           Show this help
 
 Examples:
   sitetest run tests/login-flow.yaml
   sitetest run tests/
   sitetest run tests/login-flow.yaml --headless
+  sitetest update tests/login-flow.yaml
+  sitetest update tests/ --all
 `);
   process.exit(0);
+}
+
+async function collectRunbooks(targets) {
+  const paths = [];
+  for (const target of targets) {
+    const resolved = resolve(target);
+    const info = await stat(resolved);
+    if (info.isDirectory()) {
+      const files = await readdir(resolved);
+      for (const f of files) {
+        if (f.endsWith(".yaml") || f.endsWith(".yml")) {
+          paths.push(resolve(resolved, f));
+        }
+      }
+    } else {
+      paths.push(resolved);
+    }
+  }
+  return paths;
 }
 
 if (command === "run") {
@@ -48,21 +74,7 @@ if (command === "run") {
     process.exit(1);
   }
 
-  const runbookPaths = [];
-  for (const target of targets) {
-    const resolved = resolve(target);
-    const info = await stat(resolved);
-    if (info.isDirectory()) {
-      const files = await readdir(resolved);
-      for (const f of files) {
-        if (f.endsWith(".yaml") || f.endsWith(".yml")) {
-          runbookPaths.push(resolve(resolved, f));
-        }
-      }
-    } else {
-      runbookPaths.push(resolved);
-    }
-  }
+  const runbookPaths = await collectRunbooks(targets);
 
   if (runbookPaths.length === 0) {
     console.error("Error: no .yaml/.yml runbook files found.");
@@ -91,6 +103,28 @@ if (command === "run") {
   }
 
   process.exit(totalFailed > 0 ? 1 : 0);
+} else if (command === "update") {
+  if (targets.length === 0) {
+    console.error("Error: no runbook file or directory specified.");
+    process.exit(1);
+  }
+
+  const runbookPaths = await collectRunbooks(targets);
+
+  if (runbookPaths.length === 0) {
+    console.error("Error: no .yaml/.yml runbook files found.");
+    process.exit(1);
+  }
+
+  for (const path of runbookPaths) {
+    try {
+      const updated = await updateBaselines(path);
+      console.log(`Updated baselines for ${path}: ${updated.join(", ")}`);
+    } catch (err) {
+      console.error(`Error updating ${path}: ${err.message}`);
+      process.exit(1);
+    }
+  }
 } else {
   console.error(`Unknown command: ${command}. Run "sitetest --help" for usage.`);
   process.exit(1);

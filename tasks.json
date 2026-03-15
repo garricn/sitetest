@@ -185,7 +185,7 @@
               "task": "Sub-flows — run step type, flow file resolution",
               "owner": "--",
               "depends": ["RUN-8"],
-              "status": "backlog",
+              "status": "done",
               "release": "v0.4.0"
             },
             {
@@ -193,7 +193,7 @@
               "task": "JSON output mode (--output json) for CI consumption",
               "owner": "--",
               "depends": ["RUN-8"],
-              "status": "backlog",
+              "status": "done",
               "release": "v0.4.0"
             },
             {
@@ -201,7 +201,7 @@
               "task": "--continue-on-error flag — run all steps, report all failures",
               "owner": "--",
               "depends": ["RUN-8"],
-              "status": "backlog",
+              "status": "done",
               "release": "v0.4.0"
             },
             {
@@ -209,7 +209,7 @@
               "task": "JUnit XML output for CI systems",
               "owner": "--",
               "depends": ["RUN-8"],
-              "status": "backlog",
+              "status": "done",
               "release": "v0.4.0"
             }
           ]

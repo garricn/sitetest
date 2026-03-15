@@ -1,16 +1,24 @@
 {
   "name": "sitetest",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "description": "Behavior test engine for web UIs — discover and run test runbooks via CDP.",
   "type": "module",
   "bin": {
     "sitetest": "./bin/sitetest.js"
   },
+  "main": "./lib/index.js",
   "exports": {
-    ".": "./lib/index.js"
+    ".": "./lib/index.js",
+    "./runner": "./lib/runner.js",
+    "./discover": "./lib/discover.js",
+    "./baseline": "./lib/baseline.js",
+    "./diff": "./lib/diff.js"
   },
   "scripts": {
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "generate": "node scripts/generate.js",
+    "api": "node bin/api-server.js",
+    "mcp": "node bin/mcp-server.js"
   },
   "keywords": [
     "testing",
@@ -21,10 +29,12 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
     "js-yaml": "^4.1.0",
     "pixelmatch": "^7.1.0",
     "playwright": "^1.58.2",
     "pngjs": "^7.0.0",
-    "sitecap": "github:garricn/sitecap"
+    "sitecap": "github:garricn/sitecap",
+    "zod": "^4.3.6"
   }
 }

@@ -1,0 +1,88 @@
+[
+  {
+    "name": "sitetest_run",
+    "description": "Execute a sitetest runbook against a live page via CDP or headless Chrome",
+    "input_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "runbook": {
+          "type": "string",
+          "description": "Path to YAML runbook file"
+        },
+        "headless": {
+          "default": true,
+          "description": "Launch headless Chrome",
+          "type": "boolean"
+        },
+        "cdpPort": {
+          "default": 9222,
+          "description": "CDP port for attached Chrome",
+          "type": "number"
+        },
+        "envFile": {
+          "description": "Path to .env file for $VAR resolution",
+          "type": "string"
+        },
+        "continueOnError": {
+          "default": false,
+          "description": "Run all steps even after failures",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "runbook",
+        "headless",
+        "cdpPort",
+        "continueOnError"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "sitetest_discover",
+    "description": "Discover testable behaviors from sitecap captures and generate runbooks",
+    "input_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "sitecapDir": {
+          "type": "string",
+          "description": "Path to sitecap capture directory"
+        },
+        "outDir": {
+          "default": "./runbooks",
+          "description": "Output directory for generated runbooks",
+          "type": "string"
+        },
+        "site": {
+          "description": "Base site URL (auto-detected from meta.json if omitted)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sitecapDir",
+        "outDir"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "sitetest_update",
+    "description": "Accept current captures as new baselines for a runbook",
+    "input_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "runbook": {
+          "type": "string",
+          "description": "Path to YAML runbook file"
+        }
+      },
+      "required": [
+        "runbook"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

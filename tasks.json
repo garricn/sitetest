@@ -91,7 +91,7 @@
           "task": "Headless session cookie persistence — cookies set via server-side redirects not visible to subsequent navigations. Plan: tasks/active/fix-1-cookie-persistence-2026-03-15.md",
           "owner": "--",
           "depends": ["RUN-8"],
-          "status": "pending",
+          "status": "done",
           "release": "v0.1.1"
         }
       ]

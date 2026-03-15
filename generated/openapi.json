@@ -1,0 +1,159 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "sitetest API",
+    "version": "0.5.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3200"
+    }
+  ],
+  "paths": {
+    "/run": {
+      "post": {
+        "summary": "Execute a sitetest runbook against a live page via CDP or headless Chrome",
+        "operationId": "run",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "runbook": {
+                    "type": "string",
+                    "description": "Path to YAML runbook file"
+                  },
+                  "headless": {
+                    "default": true,
+                    "description": "Launch headless Chrome",
+                    "type": "boolean"
+                  },
+                  "cdpPort": {
+                    "default": 9222,
+                    "description": "CDP port for attached Chrome",
+                    "type": "number"
+                  },
+                  "envFile": {
+                    "description": "Path to .env file for $VAR resolution",
+                    "type": "string"
+                  },
+                  "continueOnError": {
+                    "default": false,
+                    "description": "Run all steps even after failures",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "runbook",
+                  "headless",
+                  "cdpPort",
+                  "continueOnError"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/discover": {
+      "get": {
+        "summary": "Discover testable behaviors from sitecap captures and generate runbooks",
+        "operationId": "discover",
+        "parameters": [
+          {
+            "name": "sitecapDir",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Path to sitecap capture directory"
+            }
+          },
+          {
+            "name": "outDir",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "default": "./runbooks",
+              "description": "Output directory for generated runbooks",
+              "type": "string"
+            }
+          },
+          {
+            "name": "site",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "description": "Base site URL (auto-detected from meta.json if omitted)",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/update": {
+      "post": {
+        "summary": "Accept current captures as new baselines for a runbook",
+        "operationId": "update",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                  "runbook": {
+                    "type": "string",
+                    "description": "Path to YAML runbook file"
+                  }
+                },
+                "required": [
+                  "runbook"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  }
+}

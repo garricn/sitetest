@@ -12,11 +12,19 @@
   "scripts": {
     "test": "node --test test/*.test.js"
   },
-  "keywords": ["testing", "behavior", "cdp", "playwright", "runbook"],
+  "keywords": [
+    "testing",
+    "behavior",
+    "cdp",
+    "playwright",
+    "runbook"
+  ],
   "license": "MIT",
   "dependencies": {
-    "sitecap": "file:../sitecap",
+    "js-yaml": "^4.1.0",
+    "pixelmatch": "^7.1.0",
     "playwright": "^1.58.2",
-    "js-yaml": "^4.1.0"
+    "pngjs": "^7.0.0",
+    "sitecap": "file:../sitecap"
   }
 }

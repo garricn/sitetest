@@ -95,7 +95,6 @@ if (command === "run") {
     process.exit(1);
   }
 
-  let totalPassed = 0;
   let totalFailed = 0;
   const allResults = [];
 
@@ -113,7 +112,6 @@ if (command === "run") {
       if (!values.output || values.output === "terminal") {
         printResult(result);
       }
-      totalPassed += result.passed;
       totalFailed += result.failed;
     } catch (err) {
       console.error(`\nError running ${path}: ${err.message}`);

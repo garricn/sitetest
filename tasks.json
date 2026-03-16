@@ -14,5 +14,20 @@
         }
       ]
     }
+    },
+    {
+      "name": "Features",
+      "prefix": "FEAT",
+      "tasks": [
+        {
+          "id": "FEAT-1",
+          "task": "sitetest --video — use sitecap createCaptureSession() to record full test runs. Plan: tasks/active/feat-1-video-recording-2026-03-16.md",
+          "owner": "--",
+          "depends": [],
+          "status": "pending",
+          "release": "--"
+        }
+      ]
+    }
   ]
 }

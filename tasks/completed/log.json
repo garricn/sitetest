@@ -1,0 +1,23 @@
+[
+  { "id": "RUN-1", "task": "package.json with sitecap file: dep, CLI entry point, YAML runbook parser", "release": "v0.1.0", "completed": "2026-03-15" },
+  { "id": "RUN-2", "task": "CDP connection — attach to running Chrome (default) or launch headless", "release": "v0.1.0", "completed": "2026-03-15" },
+  { "id": "RUN-3", "task": "waitForSettle — network idle 500ms + DOM quiet 500ms via MutationObserver, 10s max", "release": "v0.1.0", "completed": "2026-03-15" },
+  { "id": "RUN-4", "task": "Env var resolution — $VAR syntax from .env + process.env, fail early on missing vars", "release": "v0.1.0", "completed": "2026-03-15" },
+  { "id": "RUN-5", "task": "Step executor — goto, click, fill, select, check/uncheck, press, scroll, hover, wait", "release": "v0.1.0", "completed": "2026-03-15" },
+  { "id": "RUN-6", "task": "Behavioral assertions — url, url_changed, title, contains, element, cookie, localStorage, request", "release": "v0.1.0", "completed": "2026-03-15" },
+  { "id": "RUN-7", "task": "Terminal reporter — step-by-step pass/fail with timing", "release": "v0.1.0", "completed": "2026-03-15" },
+  { "id": "RUN-8", "task": "Library API — export run() function for sitefix.dev consumption", "release": "v0.1.0", "completed": "2026-03-15" },
+  { "id": "FIX-1", "task": "Headless session cookie persistence — cookies set via server-side redirects", "release": "v0.1.1", "completed": "2026-03-15" },
+  { "id": "CAP-1", "task": "Import sitecap capturePage() for capture steps. Baseline save/load", "release": "v0.2.0", "completed": "2026-03-15" },
+  { "id": "CAP-2", "task": "Capture diff — pixelmatch screenshots, text diff aria, JSON diff console/network/storage", "release": "v0.2.0", "completed": "2026-03-15" },
+  { "id": "CAP-3", "task": "Invariant assertions — no_console_errors, no_network_errors, a11y_complete", "release": "v0.2.0", "completed": "2026-03-15" },
+  { "id": "CAP-4", "task": "sitetest update CLI — accept current captures as new baselines", "release": "v0.2.0", "completed": "2026-03-15" },
+  { "id": "DSC-1", "task": "Aria tree parser — sitecap accessibility.txt → structured element list", "release": "v0.3.0", "completed": "2026-03-15" },
+  { "id": "DSC-2", "task": "Confidence classification — high/medium/low per element type", "release": "v0.3.0", "completed": "2026-03-15" },
+  { "id": "DSC-3", "task": "Runbook generator — elements → YAML runbook with appropriate assertions", "release": "v0.3.0", "completed": "2026-03-15" },
+  { "id": "DSC-4", "task": "sitegrade testability integration — consume findings to skip untestable elements", "release": "v0.3.0", "completed": "2026-03-15" },
+  { "id": "ADV-1", "task": "Sub-flows — run step type, flow file resolution", "release": "v0.4.0", "completed": "2026-03-15" },
+  { "id": "ADV-2", "task": "JSON output mode (--output json) for CI consumption", "release": "v0.4.0", "completed": "2026-03-15" },
+  { "id": "ADV-3", "task": "--continue-on-error flag — run all steps, report all failures", "release": "v0.4.0", "completed": "2026-03-15" },
+  { "id": "ADV-4", "task": "JUnit XML output for CI systems", "release": "v0.4.0", "completed": "2026-03-15" }
+]

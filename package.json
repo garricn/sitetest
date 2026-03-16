@@ -36,5 +36,9 @@
     "pngjs": "^7.0.0",
     "sitecap": "github:garricn/sitecap",
     "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.3"
   }
 }

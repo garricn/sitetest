@@ -51,7 +51,7 @@
     "pixelmatch": "^7.1.0",
     "playwright": "^1.58.2",
     "pngjs": "^7.0.0",
-    "sitecap": "file:../sitecap",
+    "sitecap": "github:garricn/sitecap",
     "zod": "^4.3.6"
   },
   "devDependencies": {

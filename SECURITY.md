@@ -2,6 +2,6 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please report it responsibly by emailing **security@prim.sh**. Do not open a public issue.
+If you discover a security vulnerability, please report it through [GitHub Security Advisories](https://github.com/garricn/sitetest/security/advisories/new). Do not open a public issue.
 
 We will acknowledge your report within 48 hours and aim to provide a fix within 7 days for critical issues.

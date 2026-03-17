@@ -27,11 +27,8 @@ These must be resolved before the repo can be made public.
 
 - File: `package.json`
 - Current: `"sitecap": "file:../sitecap"` — breaks independent installation
-- Decision required from user: one of:
-  - **(a)** Publish sitecap to npm first, then reference it as a normal semver dep
-  - **(b)** Vendor sitecap into sitetest as a subdirectory
-  - **(c)** Make sitecap a peerDependency and document manual setup
-- Recommendation: **(a)** — publish sitecap to npm. It's already a separate repo and used as a distinct module. This is the cleanest path.
+- **Hard prerequisite: sitecap REL-1 must complete and npm publish must succeed before this phase.**
+- Replace `"sitecap": "file:../sitecap"` with `"sitecap": "^1.0.0"` (published npm package)
 - Once resolved, update CI workflow to remove the hardcoded checkout step
 
 #### A3. Add `"files"` field to package.json
@@ -64,19 +61,16 @@ These must be resolved before the repo can be made public.
 - Replace `security@prim.sh` with public-facing contact
 - Decision required: which email? Options: a GitHub security advisory link, or a dedicated public email
 
-#### B3. Remove internal files from repo
+#### B3. Keep CLAUDE.md and Skill.md in repo
 
-- Files to remove: `Skill.md`, `CLAUDE.md`
-- `CLAUDE.md` contains internal project instructions — useful for development but not appropriate in a public repo. Move to `.claude/` (already gitignored via convention) or remove entirely.
-- `Skill.md` is Claude Code skill config — remove from repo
+- `CLAUDE.md` and `Skill.md` stay in the repo — useful for contributors using Claude Code.
+- The `"files"` whitelist in package.json (Phase A3) already excludes them from npm publish. No action needed.
 
 | File       | Action              | Reason                        |
 |------------|---------------------|-------------------------------|
-| CLAUDE.md  | Remove from repo    | Internal dev instructions     |
-| Skill.md   | Remove from repo    | Claude Code skill config      |
-| tasks/     | Keep gitignored OR remove completed/ contents | Task management artifacts |
-
-- Decision required: whether to keep `tasks/` in repo (it has completed plan docs that serve as historical context) or strip it
+| CLAUDE.md  | Keep in repo        | Useful for Claude Code contributors; excluded from npm by `"files"` |
+| Skill.md   | Keep in repo        | Useful for Claude Code contributors; excluded from npm by `"files"` |
+| tasks/     | Keep in repo        | Historical context in completed plan docs; excluded from npm by `"files"` |
 
 ### Phase C — Community Scaffolding (PARA with Phase B)
 
@@ -101,6 +95,11 @@ These must be resolved before the repo can be made public.
   - `"author": "..."`
   - `"engines": { "node": ">=22" }` — CI uses Node 22, ESM features require it
 
+#### C4. Bump version to 1.0.0
+
+- File: `package.json`
+- Change `"version": "0.5.0"` → `"version": "1.0.0"` to match sitecap and signal stable public release
+
 ### Phase D — Nice-to-Have (SRL, after C)
 
 #### D1. Add CHANGELOG.md
@@ -118,8 +117,9 @@ These must be resolved before the repo can be made public.
 
 | Decision | Choice | Rationale |
 |----------|--------|-----------|
-| sitecap resolution | Publish to npm (recommended) | Cleanest for consumers; sitecap is already a separate repo |
-| Internal files | Remove CLAUDE.md, Skill.md | They contain workflow-specific instructions, not project docs |
+| sitecap resolution | Hard prereq: sitecap REL-1 + npm publish | Cleanest for consumers; sitecap is already a separate repo |
+| Internal files | Keep CLAUDE.md, Skill.md in repo | Useful for Claude Code contributors; `"files"` whitelist excludes from npm |
+| Version | Bump to 1.0.0 | Match sitecap; signal stable public release |
 | files field vs .npmignore | `"files"` in package.json | Whitelist is safer than blacklist for excluding sensitive files |
 | Node.js version | `>=22` in engines | CI runs 22; ESM + node:test features require recent Node |
 
@@ -141,11 +141,11 @@ No new code logic — existing `make check` must continue to pass after all chan
 
 ## Decisions Required From User
 
-1. **sitecap dependency**: publish to npm, vendor, or peerDep?
+1. ~~**sitecap dependency**~~ — resolved: publish to npm (hard prereq: sitecap REL-1)
 2. **SECURITY.md email**: what public-facing contact to use?
 3. **GitHub repo URL**: needed for package.json repository/bugs fields
-4. **tasks/ directory**: keep in public repo or strip?
-5. **CLAUDE.md**: remove entirely or move to .claude/?
+4. ~~**tasks/ directory**~~ — resolved: keep in repo
+5. ~~**CLAUDE.md**~~ — resolved: keep in repo
 
 ## Agent Team
 

@@ -19,6 +19,7 @@ const { values, positionals } = parseArgs({
     output: { type: "string" },
     site: { type: "string", short: "s" },
     sitegrade: { type: "string" },
+    video: { type: "boolean", default: false },
     "continue-on-error": { type: "boolean", default: false },
     all: { type: "boolean", default: false },
     help: { type: "boolean", short: "h", default: false },
@@ -47,6 +48,7 @@ Options:
   --output <format>        Output format: terminal (default), json, junit
   --sitegrade <file>       Sitegrade findings JSON (for discover; optional)
   --headless               Launch headless Chrome instead of attaching to running Chrome
+  --video                  Record video of test run (.webm in captures directory)
   --continue-on-error      Run all steps even after failures
   --all                    Update all runbooks in directory (for update command)
   -h, --help               Show this help
@@ -104,6 +106,7 @@ if (command === "run") {
         runbook: path,
         cdpPort: parseInt(values.port, 10),
         headless: values.headless,
+        video: values.video,
         dotenvPath: values.env ? resolve(values.env) : undefined,
         continueOnError: values["continue-on-error"],
       });

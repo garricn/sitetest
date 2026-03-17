@@ -1,3 +1,32 @@
 {
-  "sections": []
+  "sections": [
+    {
+      "name": "Open-Source Readiness",
+      "prefix": "OSS",
+      "tasks": [
+        {
+          "id": "OSS-1",
+          "task": "Prepare sitetest for open-source release — LICENSE, README, packaging, dep resolution, CI fixes. Plan: tasks/active/oss-1-opensourcing-readiness-2026-03-16.md",
+          "owner": "--",
+          "depends": [],
+          "status": "pending",
+          "release": "--"
+        }
+      ]
+    },
+    {
+      "name": "Features",
+      "prefix": "FEAT",
+      "tasks": [
+        {
+          "id": "FEAT-1",
+          "task": "sitetest --video — use sitecap createCaptureSession() to record full test runs. Plan: tasks/active/feat-1-video-recording-2026-03-16.md",
+          "owner": "--",
+          "depends": [],
+          "status": "done",
+          "release": "--"
+        }
+      ]
+    }
+  ]
 }

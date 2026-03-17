@@ -9,7 +9,7 @@
           "task": "Prepare sitetest for open-source release — LICENSE, README, packaging, dep resolution, CI fixes. Plan: tasks/active/oss-1-opensourcing-readiness-2026-03-16.md",
           "owner": "--",
           "depends": [],
-          "status": "pending",
+          "status": "done",
           "release": "--"
         }
       ]

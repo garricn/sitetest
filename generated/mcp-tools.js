@@ -27,6 +27,11 @@ export const tools = [
                         "description": "Path to .env file for $VAR resolution",
                         "type": "string"
                   },
+                  "video": {
+                        "default": false,
+                        "description": "Record video of test run (.webm)",
+                        "type": "boolean"
+                  },
                   "continueOnError": {
                         "default": false,
                         "description": "Run all steps even after failures",
@@ -37,6 +42,7 @@ export const tools = [
                   "runbook",
                   "headless",
                   "cdpPort",
+                  "video",
                   "continueOnError"
             ],
             "additionalProperties": false

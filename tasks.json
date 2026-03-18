@@ -28,7 +28,7 @@
         },
         {
           "id": "FEAT-2",
-          "task": "Cookie persistence for authenticated e2e runs — implement `cookies: save` and `cookies: load` steps so auth-flow.yaml can persist session and subsequent runbooks run authenticated.",
+          "task": "Cookie persistence for authenticated e2e runs — implement `cookies: save` and `cookies: load` steps so auth-flow.yaml can persist session and subsequent runbooks run authenticated. Plan: tasks/active/feat-2-cookie-persistence-2026-03-17.md",
           "owner": "--",
           "depends": [],
           "status": "pending",

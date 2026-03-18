@@ -15,6 +15,20 @@
       ]
     },
     {
+      "name": "CI Integration",
+      "prefix": "CI",
+      "tasks": [
+        {
+          "id": "CI-1",
+          "task": "Add GitHub Actions step to post visual diff images as PR comments when snapshot tests fail (uses __captures__/ artifact + gh api or actions-comment-pull-request)",
+          "owner": "--",
+          "depends": [],
+          "status": "pending",
+          "release": "--"
+        }
+      ]
+    },
+    {
       "name": "Features",
       "prefix": "FEAT",
       "tasks": [
@@ -36,10 +50,10 @@
         },
         {
           "id": "FEAT-4",
-          "task": "Multi-variant baselines — when sitecap outputs <page>/<viewport>[-dark]/ structure, sitetest runbooks capture and diff per variant; baselines namespaced as __baselines__/<runbook>/<capture>/<viewport>[-dark]/; depends on sitecap VARIANT-1",
+          "task": "Multi-variant baselines — runbook-level variants with per-variant capture/diff/baseline directories. Plan: tasks/completed/feat-4-multi-variant-baselines-2026-03-17.md",
           "owner": "--",
           "depends": [],
-          "status": "pending",
+          "status": "done",
           "release": "--"
         },
         {

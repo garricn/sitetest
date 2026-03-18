@@ -44,10 +44,10 @@
         },
         {
           "id": "FEAT-3",
-          "task": "Surface sitecap capture duration in generated runbook header comment. Plan: tasks/active/feat-3-capture-duration-header-2026-03-17.md",
+          "task": "Surface sitecap capture duration in generated runbook header comment. Plan: tasks/completed/feat-3-capture-duration-header-2026-03-17.md",
           "owner": "--",
           "depends": [],
-          "status": "pending",
+          "status": "done",
           "release": "--"
         }
       ]

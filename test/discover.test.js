@@ -150,7 +150,7 @@ describe("discover", () => {
     await writeFile(join(TMP, "captures", "page1", "accessibility.txt"), GITHUB_LOGIN_SNAPSHOT);
     await writeFile(
       join(TMP, "captures", "page1", "meta.json"),
-      JSON.stringify({ url: "https://github.com/login", timestamp: "2026-03-15T00:00:00Z" })
+      JSON.stringify({ url: "https://github.com/login", timestamp: "2026-03-15T00:00:00Z", duration_ms: 1234 })
     );
   });
 
@@ -158,7 +158,7 @@ describe("discover", () => {
     await rm(TMP, { recursive: true, force: true });
   });
 
-  it("discovers elements and writes runbook YAML files", async () => {
+  it("discovers elements and writes runbook YAML files with capture timing", async () => {
     const outDir = join(TMP, "runbooks");
     const results = await discover({
       sitecapDir: join(TMP, "captures"),
@@ -170,9 +170,29 @@ describe("discover", () => {
 
     // Verify YAML file was written
     const yamlContent = await readFile(results[0].path, "utf-8");
+    assert.match(yamlContent, /capture: \d+\.\d+s/);
+    assert.match(yamlContent, /discovery: \d+\.\d+s/);
     const parsed = yaml.load(yamlContent);
     assert.equal(parsed.source, "auto-discover");
     assert.ok(parsed.steps.length > 0);
+  });
+
+  it("header omits capture time when meta.json lacks duration_ms", async () => {
+    // Overwrite meta.json without duration_ms
+    await writeFile(
+      join(TMP, "captures", "page1", "meta.json"),
+      JSON.stringify({ url: "https://github.com/login", timestamp: "2026-03-15T00:00:00Z" })
+    );
+    const outDir = join(TMP, "runbooks-no-duration");
+    const results = await discover({
+      sitecapDir: join(TMP, "captures"),
+      outDir,
+    });
+
+    assert.equal(results.length, 1);
+    const yamlContent = await readFile(results[0].path, "utf-8");
+    assert.match(yamlContent, /capture time not included/);
+    assert.match(yamlContent, /discovery: \d+\.\d+s/);
   });
 
   it("filters untestable elements with sitegrade findings", async () => {

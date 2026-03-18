@@ -20,10 +20,10 @@
       "tasks": [
         {
           "id": "CI-1",
-          "task": "Post visual diff images as PR comments when snapshot tests fail. Plan: tasks/active/ci-1-visual-diff-pr-comments-2026-03-17.md",
+          "task": "Post visual diff images as PR comments when snapshot tests fail. Plan: tasks/completed/ci-1-visual-diff-pr-comments-2026-03-17.md",
           "owner": "--",
           "depends": [],
-          "status": "pending",
+          "status": "done",
           "release": "--"
         }
       ]

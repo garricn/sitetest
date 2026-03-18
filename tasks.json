@@ -50,10 +50,10 @@
         },
         {
           "id": "FEAT-4",
-          "task": "Multi-variant baselines — runbook-level variants with per-variant capture/diff/baseline directories. Plan: tasks/active/feat-4-multi-variant-baselines-2026-03-17.md",
+          "task": "Multi-variant baselines — runbook-level variants with per-variant capture/diff/baseline directories. Plan: tasks/completed/feat-4-multi-variant-baselines-2026-03-17.md",
           "owner": "--",
           "depends": [],
-          "status": "pending",
+          "status": "done",
           "release": "--"
         },
         {

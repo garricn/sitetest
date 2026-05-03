@@ -52,7 +52,7 @@
     "playwright": "^1.58.2",
     "pngjs": "^7.0.0",
     "sitecap": "github:garricn/sitecap",
-    "zod": "^4.3.6"
+    "zod": "^4.4.2"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
